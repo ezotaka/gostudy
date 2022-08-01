@@ -18,13 +18,16 @@ func main() {
 	app := kingpin.New("gostudy", "Assists in creating code for go language learning")
 	add(app)
 	rm(app)
+	run(app)
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 }
 
 func add(app *kingpin.Application) {
 	cmd := app.Command("add", "Add new study.")
-	studyName := cmd.Arg("studyName", "Name for study.").Required().String()
+
 	open := cmd.Flag("open", "Open new file automatically with Visual Studio Code.").Short('o').Bool()
+
+	studyName := cmd.Arg("studyName", "Name of study.").Required().String()
 
 	cmd.Action(func(c *kingpin.ParseContext) error {
 		addCommand(*studyName, *open)
@@ -79,8 +82,10 @@ func openWithVSCode(file string) {
 
 func rm(app *kingpin.Application) {
 	cmd := app.Command("rm", "Remove the study")
-	studyName := cmd.Arg("studyName", "Name for study.").Required().String()
+
 	force := cmd.Flag("force", "Open new file automatically with Visual Studio Code").Short('f').Bool()
+
+	studyName := cmd.Arg("studyName", "Name of study.").Required().String()
 
 	cmd.Action(func(c *kingpin.ParseContext) error {
 		rmCommand(*studyName, *force)
@@ -118,4 +123,29 @@ func rmCommand(studyName string, force bool) {
 	}
 
 	fmt.Printf("Removed %s directory.\n", dir)
+}
+
+func run(app *kingpin.Application) {
+	cmd := app.Command("run", "run the study code")
+
+	studyName := cmd.Arg("studyName", "Name of study to run.").Required().String()
+
+	cmd.Action(func(c *kingpin.ParseContext) error {
+		runCommand(*studyName)
+		return nil
+	})
+}
+
+func runCommand(studyName string) {
+	if _, err := exec.LookPath("go"); err != nil {
+		fmt.Printf("error: go command is not found")
+	}
+
+	file := fmt.Sprintf("./cmd/%s/main.go", studyName)
+	cmd := exec.Command("go", "run", file)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		fmt.Printf("error: %v\n", err)
+	}
 }
