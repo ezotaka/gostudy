@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/ezotaka/gorun/gorun"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
@@ -108,7 +109,7 @@ func rmCommand(studyName string, force bool) {
 
 	confirm := true
 	if !force {
-		fmt.Printf("Remove %s directory?  [y]es/[n]o ", dir)
+		fmt.Printf("Remove %s directory? (y/n) ", dir)
 		var yesNo string
 		fmt.Scan(&yesNo)
 		confirm = strings.EqualFold(yesNo, "y") || strings.EqualFold(yesNo, "yes")
@@ -129,23 +130,17 @@ func run(app *kingpin.Application) {
 	cmd := app.Command("run", "run the study code")
 
 	studyName := cmd.Arg("studyName", "Name of study to run.").Required().String()
+	funcName := cmd.Arg("funcName", "Name of func to run.").Default("main").String()
 
 	cmd.Action(func(c *kingpin.ParseContext) error {
-		runCommand(*studyName)
+		runCommand(*studyName, *funcName)
 		return nil
 	})
 }
 
-func runCommand(studyName string) {
-	if _, err := exec.LookPath("go"); err != nil {
-		fmt.Printf("error: go command is not found")
-	}
-
+func runCommand(studyName, funcName string) {
 	file := fmt.Sprintf("./cmd/%s/main.go", studyName)
-	cmd := exec.Command("go", "run", file)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
+	if err := gorun.Exec(file, funcName); err != nil {
 		fmt.Printf("error: %v\n", err)
 	}
 }
