@@ -12,7 +12,7 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
-//go:embed templates/main.go
+//go:embed _main_template.go
 var mainGo []byte
 
 func main() {
