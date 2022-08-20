@@ -6,8 +6,8 @@ github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/ezotaka/golib v0.9.0 h1:WfdOMdPVPmnLLUZbnCnsYM0SoHjTz10WkUSIf7wsBYQ=
 github.com/ezotaka/golib v0.9.0/go.mod h1:n4rcOMSbYDosHgzhDg292RU+WShZM9QmAwBBRlUXW6U=
-github.com/ezotaka/gorun v0.2.0 h1:GqQoe110RcrWYnQW53kdcclKEjIg2vkFRPzHnZ+RoTI=
-github.com/ezotaka/gorun v0.2.0/go.mod h1:nr0zuUzot2SKz2KppWKR4HBLsvmt9we/Tz+sX16Jeg4=
+github.com/ezotaka/gorun v0.3.0 h1:r1YP+yGsGhrp2rJGciW5M6SMXgU+S3J8UBiAWhC4/7w=
+github.com/ezotaka/gorun v0.3.0/go.mod h1:nr0zuUzot2SKz2KppWKR4HBLsvmt9we/Tz+sX16Jeg4=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
